@@ -55,3 +55,12 @@ Questions:
   ```
   which will fail to replace $(VAR2) with a value of VAR2
 </details>
+
+
+    <details>
+      <summary>Example</summary>
+
+      ```
+      long console output here
+      ```
+    </details>
