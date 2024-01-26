@@ -39,8 +39,10 @@ Questions:
 
 <details>
   <summary>Answer</summary>
-  There are cases when order of fields is important. I.e. https://kubernetes.io/docs/tasks/inject-data-application/define-interdependent-environment-variables/
-  range over array of maps doesn't guarantee the order. i.e.:
+  There are cases when order of fields is important. I.e. https://kubernetes.io/docs/tasks/inject-data-application/define-interdependent-environment-variables/  
+  
+  range over array of maps doesn't guarantee the order. i.e.:  
+  
   ```
   env:
     VAR2: val2
@@ -54,13 +56,23 @@ Questions:
     value: "val1"
   ```
   which will fail to replace $(VAR2) with a value of VAR2
+
+  Alternatives:
+  * use toYaml:  
+    *values.yaml*:
+    ```
+    env:
+      - name: "VAR2"
+        value: "val1"
+      - name: "VAR1"
+        value: "$(VAR2)"
+    ```
+    template:
+    ```
+    env:
+      {{ .Values.env | toYaml | nindent 8 }}
+    ```
+  * try to pass variables explicitly w\o needing of interdependent values
+  * put a hard-coded env var in template in the bottom of env vars
 </details>
 
-
-    <details>
-      <summary>Example</summary>
-
-      ```
-      long console output here
-      ```
-    </details>
