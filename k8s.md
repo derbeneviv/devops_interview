@@ -1,3 +1,26 @@
+# static pods shenanigans (*)
+Let's imagine an attacker hacs a worker node and gets root
+He tries to read a secret secrets from the whole cluster and do the following:
+1) create a static pod on a node
+2) this allows howm an access to kube api
+3) he can read serets now
+
+Is this correct? 
+If yes, how can we defend against it? 
+If no, what mechanisms prevent this behaviour?
+
+<details>
+  <summary>Answer</summary>
+  we can't request objects from static pod: 
+  https://kubernetes.io/docs/tasks/configure-pod-container/static-pod/
+  ```
+  The spec of a static Pod cannot refer to other API objects (e.g., ServiceAccount, ConfigMap, Secret, etc).
+  ```
+
+  static pods don't interact with kube api directly, api creates a mirror pod, so we can't have a direct access to secrets
+</details>
+  
+
 # env vars weird helm template (*)
 there are two snippets of code:  
 first:  
