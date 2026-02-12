@@ -2,9 +2,10 @@
 ```
 FROM foo
 
+# копируем код приложения
 COPY app /app 
 # ставим жырные либы
-RUN pip install -r req.txt
+RUN pip install -r /app/req.txt
 CMD /app/app.py
 ```
 
