@@ -11,7 +11,7 @@ CMD /app/app.py
 
 версии софта в RUN
 ```
-FROM foo
+FROM foo:specific-tag
 RUN apt-get update && apt-get install curl
 COPY app /app
 CMD /app/app.py
